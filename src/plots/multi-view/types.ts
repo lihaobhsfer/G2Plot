@@ -62,6 +62,28 @@ export type IView = {
    * animation 配置
    */
   readonly animation?: Animation;
+
+  /**
+   * tooltip 配置
+   */
+  readonly tooltip?: Tooltip;
+};
+
+type IPlot<O extends Options = Options & Types.LooseObject> = {
+  /**
+   * plot 类型，支持：'line' | 'column' | 'bar' | 'pie'
+   */
+  readonly type: string;
+
+  /**
+   * plot view 的布局范围，默认是占满全部
+   */
+  readonly region?: Region;
+
+  /**
+   * plot 配置
+   */
+  readonly options: O;
 };
 
 /** 配置类型定义 */
@@ -76,7 +98,12 @@ export interface MultiViewOptions
    * 每一个图层的配置。
    * 每个图层包括有自己的：数据、图形、图形映射。
    */
-  readonly views: IView[];
+  readonly views?: IView[];
+
+  /**
+   * 支持使用已有的 plot，限定与指定 plot 类型
+   */
+  readonly plots?: IPlot[];
 
   /**
    * tooltip 配置在 chart 层配置
