@@ -117,9 +117,10 @@
     "collectCoverageFrom": [
       "src/**/*.ts",
       "!**/node_modules/**",
+      
       "!**/vendor/**",
       "!**/_template/**",
-      "!**/(pie|radar)/interactions/**"
+      "!**/(pie|radar|multi-view)/interactions/**"
     ],
     "testRegex": "/__tests__/.*-spec\\.ts?$"
   },

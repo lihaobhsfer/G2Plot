@@ -8,17 +8,25 @@ order: 8
 
 ### 图层
 
-#### views
-
-<description>**required** _IView[]_</description>
-
-每一个图层的配置，每个图层都包含自己的：数据、图形、图形配置。具体见 [图层配置](#图层配置)
-
 #### syncViewPadding ✨
 
 <description>**optional** _boolean_</description>
 
 是否同步子 view 的 padding 配置。传入 boolean 值，含义是：是否需要将子 View 的 padding 同步，如果设置同步，那么可以保证子 View 在 auto padding 的情况下，所有子 View 的图形能够完全重合，避免显示上的错位。
+
+#### views
+
+<description>**optional** _IView[]_</description>
+
+每一个图层的配置，每个图层都包含自己的：数据、图形、图形配置。具体见 [图层配置](#图层配置)
+
+在 2.4.0 版本之后，我们提供了 `plots` 的配置项，你可以使用 `plots` 来代替 `views`。每一个 plot 是一个图层，详细见: [#plots]
+
+#### plots ✨
+
+<description>**optional** _IView[]_</description>
+
+每一个图层的配置，每个图层都包含自己的：数据、图形、图形配置。具体见 [图层配置](#图层配置)
 
 ### 图层配置
 
