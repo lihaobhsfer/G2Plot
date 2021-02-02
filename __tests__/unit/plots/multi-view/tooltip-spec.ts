@@ -3,6 +3,7 @@ import { createDiv } from '../../../utils/dom';
 
 describe('multi-view tooltip', () => {
   const plot = new MultiView(createDiv(), {
+    tooltip: { showMarkers: false },
     plots: [
       {
         type: 'line',
@@ -51,7 +52,7 @@ describe('multi-view tooltip', () => {
       ],
     });
 
-    expect(plot.chart.views.length).toBe(4);
+    expect(plot.chart.views.length).toBe(3);
     // @ts-ignore
     expect(plot.chart.getController('tooltip').isVisible()).toBe(false);
     // @ts-ignore

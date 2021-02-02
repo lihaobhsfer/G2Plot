@@ -5,6 +5,9 @@ import { Adaptor } from '../../core/adaptor';
  * 获取指定 plot 的 adaptor
  */
 export function getAdaptor<O extends Options>(plot: string): Adaptor<O> | null {
+  if (plot === 'multi-view') {
+    return null;
+  }
   try {
     const module = require(`../${plot}/adaptor`);
     return module ? module.adaptor : null;

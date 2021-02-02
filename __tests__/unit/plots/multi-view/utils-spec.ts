@@ -56,4 +56,9 @@ describe('utils', () => {
     const adaptor = getAdaptor('xxx');
     expect(adaptor).toBe(null);
   });
+
+  it('get-adaptor: 不支持再引入 multi-view', () => {
+    const adaptor = getAdaptor('multi-view');
+    expect(adaptor).toBe(null);
+  });
 });
