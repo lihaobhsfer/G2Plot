@@ -125,7 +125,7 @@ function multiPlot(params: Params<MultiViewOptions>): Params<MultiViewOptions> {
   const { plots } = options;
 
   each(plots, (plot) => {
-    const { type, region, options } = plot;
+    const { type, region, options = {} } = plot;
     const { tooltip } = options;
 
     const viewOfG2 = chart.createView({ region });

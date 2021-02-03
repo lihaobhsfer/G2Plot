@@ -18,9 +18,11 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/HkxWvFrZuC/association-data.jso
             isStack: true,
             tooltip: {
               shared: true,
-              showCrosshairs: true,
+              showCrosshairs: false,
               showMarkers: false,
             },
+            label: {},
+            interactions: [{ type: 'active-region' }],
           },
         },
         {
@@ -45,6 +47,7 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/HkxWvFrZuC/association-data.jso
             yField: 'value',
             seriesField: 'area',
             line: {},
+            point: { style: { r: 2.5 } },
             meta: {
               time: { range: [0, 1] },
             },
