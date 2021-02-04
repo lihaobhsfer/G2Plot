@@ -41,6 +41,7 @@ describe('multi-plots in multi-view', () => {
 
   it('innormal, 带不合法的 plot type', () => {
     plot.update({
+      // @ts-ignore `pass illegal type`
       plots: [
         ...plot.options.plots,
         {

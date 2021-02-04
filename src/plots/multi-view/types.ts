@@ -6,6 +6,7 @@ import { Geometry } from '../../adaptor/geometries/base';
 import { Animation } from '../../types/animation';
 import { Annotation } from '../../types/annotation';
 import { Interaction } from '../../types/interaction';
+import { IPlotTypes } from './utils';
 
 /**
  * geometry 映射信息
@@ -69,21 +70,14 @@ export type IView = {
   readonly tooltip?: Tooltip;
 };
 
-type IPlot<O extends Options = Options & Types.LooseObject> = {
-  /**
-   * plot 类型，支持：'line' | 'column' | 'bar' | 'pie'
-   */
-  readonly type: string;
-
+/**
+ * 子 plot 的配置
+ */
+export type IPlot = IPlotTypes & {
   /**
    * plot view 的布局范围，默认是占满全部
    */
   readonly region?: Region;
-
-  /**
-   * plot 配置
-   */
-  readonly options: O;
 };
 
 /** 配置类型定义 */

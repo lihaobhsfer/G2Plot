@@ -3,6 +3,7 @@ import { Geometry } from '@antv/g2';
 import { geometry as geometryAdaptor } from '../../adaptor/geometries/base';
 import { interaction, animation, theme, tooltip } from '../../adaptor/common';
 import { Params } from '../../core/adaptor';
+import { PLOT_CONTAINER_OPTIONS } from '../../core/plot';
 import { AXIS_META_CONFIG_KEYS } from '../../constant';
 import { deepAssign, flow, pick } from '../../utils';
 import { Axis } from '../../types/axis';
@@ -128,7 +129,7 @@ function multiPlot(params: Params<MultiViewOptions>): Params<MultiViewOptions> {
     const { type, region, options = {} } = plot;
     const { tooltip } = options;
 
-    const viewOfG2 = chart.createView({ region });
+    const viewOfG2 = chart.createView({ region, ...pick(options, PLOT_CONTAINER_OPTIONS) });
     if (tooltip) {
       // 配置 tooltip 交互
       viewOfG2.interaction('tooltip');
