@@ -31,12 +31,7 @@ plot.update({
         data, // 图表数据
         yField: 'area',
         xField: 'value',
-        meta: {
-          value: {
-            alias: '销售额(万)',
-          },
-        },
-        yAxis: { tickLine: false },
+        yAxis: { tickLine: null },
         xAxis: false,
         seriesField: 'area',
         label: {
@@ -59,12 +54,7 @@ plot.update({
         data, // 图表数据
         yField: 'area',
         xField: 'value',
-        meta: {
-          value: {
-            alias: '销售额(万)',
-          },
-        },
-        yAxis: { tickLine: false },
+        yAxis: { tickLine: null },
         xAxis: false,
         label: {},
         color: ({ area }) => {
@@ -92,7 +82,7 @@ plot.update({
             max: 1,
           },
         },
-        yAxis: { label: { style: { fillOpacity: 0 } }, tickLine: false },
+        yAxis: { label: { style: { fillOpacity: 0 } }, tickLine: null },
         xAxis: false,
         label: {
           offsetX: -4,
@@ -122,81 +112,64 @@ plot.update({
         }),
       },
     },
+  ],
+  views: [
     {
       region: { start: { x: 0, y: 1 / 2 }, end: { x: 1 / 2, y: 1 } },
-      type: 'bar',
-      options: {
-        data, // 图表数据
-        yField: 'area',
-        xField: 'value',
-        meta: {
-          value: {
-            alias: '销售额(万)',
-            max: 0.5,
-            min: 0,
+      data: [...data].reverse(), // 图表数据
+      meta: {
+        value: {
+          alias: '销售额(万)',
+          max: 0.5,
+          min: 0,
+        },
+      },
+      axes: { area: { tickLine: null }, value: false },
+      coordinate: { cfg: { isTransposed: true } },
+      geometries: [
+        {
+          type: 'point',
+          xField: 'area',
+          yField: 'value',
+          mapping: {
+            color: ({ area }) => {
+              const value = data.find((d) => d.area === area).value;
+              return value > 0.3 ? plot.chart.getTheme().defaultColor : defaultGrey;
+            },
+            style: ({ value }) => {
+              return {
+                r: 4,
+                strokeOpacity: 0,
+                fill: value > 0.3 ? plot.chart.getTheme().defaultColor : defaultGrey,
+              };
+            },
+          },
+          label: {
+            offsetY: -12,
+            offsetX: 8,
+            style: { textAlign: 'right' },
+            position: 'top',
+            formatter: ({ value }) => `${(value * 100).toFixed(1)}%`,
           },
         },
-        yAxis: { tickLine: false },
-        xAxis: false,
-        color: ({ area }) => {
-          const value = data.find((d) => d.area === area).value;
-          return value > 0.3 ? plot.chart.getTheme().defaultColor : defaultGrey;
-        },
-        barStyle: {
-          fillOpacity: 0,
-        },
-        label: false,
-        annotations: [
-          ...data.map((d) => {
-            return {
-              type: 'dataMarker',
-              position: d,
-              top: true,
-              line: {
-                length: 4,
-                style: {
-                  lineWidth: 0,
-                },
-              },
-              point: {
-                style: {
-                  lineWidth: 0,
-                  r: 4.5,
-                  fill: d.value > 0.3 ? plot.chart.getTheme().defaultColor : defaultGrey,
-                },
-              },
-              text: {
-                content: d.value,
-                style: {
-                  textAlign: 'center',
-                  fill: 'rgba(0,0,0,1)',
-                  fontWeight: 400,
-                },
-              },
-              style: {
-                lineWidth: 2,
-                radius: 2,
-                lineDash: [2, 4],
-                stroke: defaultGrey,
-              },
-            };
-          }),
-          ...data.map((d) => {
-            return {
-              type: 'line',
-              start: [d.area, 'min'],
-              end: [d.area, 'max'],
-              top: false,
-              style: {
-                lineWidth: 2,
-                radius: 2,
-                lineDash: [2, 4],
-                stroke: defaultGrey,
-              },
-            };
-          }),
-        ],
-      },
+      ],
+      // @ts-ignore
+      annotations: [
+        ...data.map((d) => {
+          return {
+            type: 'line',
+            start: [d.area, 'min'],
+            end: [d.area, 'max'],
+            top: false,
+            style: {
+              lineWidth: 2,
+              radius: 2,
+              lineDash: [2, 4],
+              stroke: defaultGrey,
+            },
+          };
+        }),
+      ],
     },
   ],
 });
